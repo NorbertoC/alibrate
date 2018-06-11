@@ -3,9 +3,7 @@ import {
   Dimensions,
   Keyboard,
   View,
-  KeyboardAvoidingView,
   TextInput,
-  TouchableWithoutFeedback,
   Text,
   Platform,
 } from 'react-native';
@@ -56,14 +54,14 @@ class LoginForm extends Component {
   
   renderError(errorMessage) {
     return (
-      <Text style={{ paddingLeft: L.w(5), color: 'red' }}>{errorMessage}</Text>
+      <Text style={{ paddingLeft: L.w(20), color: 'white' }}>{errorMessage}</Text>
     );
   }
   
   inputProps() {
     return {
       underlineColorAndroid: '#000',
-      style: { height: L.hProm(60), flex: 1 },
+      style: { height: L.hProm(60), flex: 1, paddingLeft: 20 },
       autoCapitalize: 'none',
       autoCorrect: false,
     };
@@ -78,37 +76,44 @@ class LoginForm extends Component {
       return <Spinner />
     } else {
       return (
-        <KeyboardAvoidingView behavior="position" style={styles.container}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={{ width: screenWidth, paddingHorizontal: L.w(30) }}>
-              <View style={styles.inputContainerStyle}>
-                <TextInput
-                  {...this.inputProps()}
-                  placeholder={'Ej: flor@mail.com'}
-                  onChangeText={(text) => { this.props.userChanged(text); }}
-                  value={this.props.user}
-                  keyboardType="numeric"
-                />
-              </View>
-              {this.renderError(userError)}
-              <View style={inputContainerStyle}>
-                <TextInput
-                  {...this.inputProps()}
-                  placeholder={'Ingresa tu contraseña'}
-                  secureTextEntry={!passwordVisible}
-                  onChangeText={(text) => { this.props.passwordChanged(text); }}
-                  value={this.props.password}
-                />
-              </View>
-              {this.renderError(passwordError)}
+        <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleStyle}>ALIBRATE</Text>
+          </View>
+          <View style={{ width: screenWidth, paddingHorizontal: L.w(20) }}>
+            <View style={styles.inputTitleStyle}>
+              <Text style={{ color: 'white' }}> E-mail (o usuario si ya eres miembro </Text>
+            </View>
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                {...this.inputProps()}
+                placeholder={'Ej: flor@mail.com'}
+                onChangeText={(text) => { this.props.userChanged(text); }}
+                value={this.props.user}
+              />
+            </View>
+            {this.renderError(userError)}
+            <View style={styles.inputTitleStyle}>
+              <Text style={{ color: 'white' }}> Contraseña </Text>
+            </View>
+            <View style={inputContainerStyle}>
+              <TextInput
+                {...this.inputProps()}
+                placeholder={'Ingresa tu contraseña'}
+                secureTextEntry={!passwordVisible}
+                onChangeText={(text) => { this.props.passwordChanged(text); }}
+                value={this.props.password}
+              />
+            </View>
+            <View style={{ marginTop: 10, }}>
               {this.renderButton()}
             </View>
-          </TouchableWithoutFeedback>
+          </View>
           {!!this.state.loginError &&
-          <Text>
+          <Text style={{ padding: L.w(20), color: 'red', fontSize: 16 }}>
             {this.state.loginError}
           </Text>}
-        </KeyboardAvoidingView>
+        </View>
       )
     }
   }
@@ -117,12 +122,29 @@ class LoginForm extends Component {
 const styles = {
   container: {
     alignItems: 'center',
-    paddingBottom: L.h(50),
+    flex: 1,
+    paddingBottom: L.h(20),
     marginTop: Platform.OS === 'ios' ? L.h(20) : 0,
+    backgroundColor: '#264053',
+  },
+  titleContainer: {
+    padding: L.w(50),
+    
+  },
+  titleStyle: {
+    fontSize: 50,
+    color: 'white',
+    textAlign: 'center',
   },
   inputContainerStyle: {
+    backgroundColor: 'white',
     flexDirection: 'row',
+    borderRadius: 5,
+    marginTop: 20,
   },
+  inputTitleStyle: {
+  
+  }
 };
 
 const mapStateToProps = ({ authReducer }) => {

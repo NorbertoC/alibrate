@@ -29,7 +29,7 @@ const styles = {
   buttonStyle: {
     alignSelf: 'stretch',
     borderRadius: 2,
-    backgroundColor: '#274762',
+    backgroundColor: '#47A6DC',
     marginVertical: L.h(5),
   },
 };
