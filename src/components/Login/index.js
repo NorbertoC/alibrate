@@ -38,7 +38,7 @@ class LoginForm extends Component {
   
   onLoginSuccess(response) {
     Service.setToken(response.access_token);
-    Actions.reset('welcome');
+    Actions.reset('main');
   }
   
   onLoginError(error) {

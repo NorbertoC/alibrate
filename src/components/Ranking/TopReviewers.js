@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
   View,
-  TouchableOpacity,
   Text
 } from 'react-native';
 import { connect } from "react-redux";
-import { getTopReadersData, getTopReviewersData } from "../../actions";
+import { Spinner } from '../common';
+import { getTopReviewersData } from "../../actions";
 
 class Main extends Component {
   constructor(props) {
@@ -16,12 +16,13 @@ class Main extends Component {
   }
   
   componentDidMount() {
-    this.props.getTopReadersData(this.successCallback, this.errorCallback);
-    this.props.getTopReviewersData(this.successCallback, this.errorCallback);
+    if (!this.props.topReviewers) {
+      this.props.getTopReviewersData(this.successCallback, this.errorCallback);
+    }
   }
   
   successCallback(response) {
-    console.log('success response: ', response);
+    console.log('success topReviewers: ', response);
   }
   
   errorCallback(error) {
@@ -29,14 +30,18 @@ class Main extends Component {
   }
   
   render() {
-    const { topReviewers, topReaders } = this.props;
+    const { topReviewers, loading } = this.props;
     debugger
-    
-    return (
-      <View style={styles.container}>
-        <Text> HOLA </Text>
-      </View>
-    );
+  
+    if(loading) {
+      return <Spinner />
+    } else {
+      return (
+        <View style={styles.container}>
+          <Text> HOLA </Text>
+        </View>
+      );
+    }
   }
 }
 const styles = {
@@ -48,8 +53,8 @@ const styles = {
 };
 
 const mapStateToProps = ({ detailsReducer }) => {
-  const { topReviewers, topReaders } = detailsReducer;
-  return { topReviewers, topReaders };
+  const { topReviewers, loading } = detailsReducer;
+  return { topReviewers, loading };
 };
 
-export default connect(mapStateToProps, { getTopReadersData, getTopReviewersData })(Main);
+export default connect(mapStateToProps, { getTopReviewersData })(Main);
