@@ -82,7 +82,7 @@ class LoginForm extends Component {
           </View>
           <View style={{ width: screenWidth, paddingHorizontal: L.w(20) }}>
             <View style={styles.inputTitleStyle}>
-              <Text style={{ color: 'white' }}> E-mail (o usuario si ya eres miembro </Text>
+              <Text style={{ color: 'white' }}> E-mail (o usuario si ya eres miembro) </Text>
             </View>
             <View style={styles.inputContainerStyle}>
               <TextInput
