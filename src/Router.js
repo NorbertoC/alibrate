@@ -10,8 +10,8 @@ const RouterComponent = () => {
     <Router>
       <Scene>
         
-        <Scene key="root" initial hideNavBar>
-          <Scene key="login" component={Login} />
+        <Scene key="root" initial title="Ranking">
+          <Scene key="login" component={Login} hideNavBar={true}/>
         </Scene>
         
         <Scene
@@ -23,7 +23,7 @@ const RouterComponent = () => {
           title="Ranking"
           labelStyle={{ fontSize: 14, fontWeight: 'bold' }}
           activeTintColor="#274762"
-          inactiveTintColor="grey"
+          inactiveTintColor="#777777"
           indicatorStyle={{ backgroundColor: '#274762' }}
         >
           <Scene

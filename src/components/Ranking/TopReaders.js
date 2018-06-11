@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {
   View,
+  Text,
+  Image,
   TouchableOpacity,
-  Text
+  ScrollView,
 } from 'react-native';
 import { connect } from "react-redux";
 import { Spinner } from '../common';
@@ -30,16 +32,63 @@ class Main extends Component {
     console.log('error: ', error);
   }
   
+  renderUsers() {
+    const { topReaders } = this.props;
+    if(topReaders) {
+      const usersInfo = topReaders.map((user, index) => {
+        console.log('readers: ', user);
+        const userNumber = index + 1;
+        const reviews = `${user.libraryCount} leídos`;
+        return (
+          <View key={index} style={styles.userContainer}>
+            <Text style={styles.userNumberStyle}>
+              {userNumber}
+            </Text>
+            <Image
+              source={{ uri: user.profile.picture }}
+              style={styles.imgStyle}
+            />
+            <View style={styles.userInfoContainer}>
+              <Text style={styles.userNameStyle}>
+                {user.username}
+              </Text>
+              <Text style={styles.userReviewStyle}>
+                {reviews}
+              </Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.followButton}>
+                <Text style={styles.buttonText}>
+                  Seguir
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )
+      });
+      return (
+        <ScrollView alwaysBounceVertical={false}>
+          {usersInfo}
+        </ScrollView>
+      )
+    }
+    return null;
+  }
+  
   render() {
-    const { topReaders, loading } = this.props;
-    debugger
-    
-    if (loading) {
-      return <Spinner/>
+    const { loading } = this.props;
+  
+    if(loading) {
+      return <Spinner />
     } else {
       return (
         <View style={styles.container}>
-          <Text> HOLA </Text>
+          <View style={styles.usersCount}>
+            <Text style={styles.userCountText}>
+              100 usuarios que más leen en Alibrate
+            </Text>
+          </View>
+          {this.renderUsers()}
         </View>
       );
     }
@@ -49,8 +98,68 @@ class Main extends Component {
 const styles = {
   container: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  usersCount: {
+    height: 60,
+    backgroundColor: '#EEEEEE',
     flexDirection: 'column',
-    backgroundColor: 'green',
+    justifyContent: 'center',
+  },
+  userCountText: {
+    marginLeft: 20,
+    color: '#ABABAB',
+    fontSize: 13,
+  },
+  userContainer: {
+    height: 70,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  userNumberStyle: {
+    padding: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  userInfoContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  imgStyle: {
+    width: 50,
+    height: 50,
+    borderRadius: 100/4,
+  },
+  userNameStyle: {
+    color: '#2D485F',
+    fontSize: 16,
+    fontWeight: 'bold',
+    paddingLeft: 10,
+    marginBottom: 5,
+  },
+  userReviewStyle: {
+    color: '#62B6E0',
+    fontSize: 14,
+    fontWeight: 'bold',
+    paddingLeft: 10,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    right: 10,
+  },
+  followButton: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#2D485F',
+    height: 35,
+    width: 65,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#2D485F',
   },
 };
 
