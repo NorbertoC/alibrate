@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import L from './LayoutSize';
 
 const Button = ({ onPress, children, disabled }) => {
   const { buttonStyle, textStyle } = styles;
@@ -22,15 +21,15 @@ const styles = {
   textStyle: {
     alignSelf: 'center',
     color: 'white',
-    fontSize: L.h(13),
+    fontSize: 13,
     fontWeight: '600',
-    paddingVertical: L.h(15),
+    paddingVertical: 15,
   },
   buttonStyle: {
     alignSelf: 'stretch',
     borderRadius: 2,
     backgroundColor: '#47A6DC',
-    marginVertical: L.h(5),
+    marginVertical: 5,
   },
 };
 

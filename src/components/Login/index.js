@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { userChanged, passwordChanged, loginUser } from '../../actions/index';
 import { Button, Spinner } from '../common';
-import L from '../../components/common/LayoutSize';
 import Service from '../../provider/Service';
 
 const screenWidth = Dimensions.get('window').width;
@@ -54,14 +53,14 @@ class LoginForm extends Component {
   
   renderError(errorMessage) {
     return (
-      <Text style={{ paddingLeft: L.w(20), color: 'white' }}>{errorMessage}</Text>
+      <Text style={{ paddingLeft: 20, color: 'white' }}>{errorMessage}</Text>
     );
   }
   
   inputProps() {
     return {
       underlineColorAndroid: '#000',
-      style: { height: L.hProm(60), flex: 1, paddingLeft: 20 },
+      style: { height: 60, flex: 1, paddingLeft: 20 },
       autoCapitalize: 'none',
       autoCorrect: false,
     };
@@ -80,7 +79,7 @@ class LoginForm extends Component {
           <View style={styles.titleContainer}>
             <Text style={styles.titleStyle}>ALIBRATE</Text>
           </View>
-          <View style={{ width: screenWidth, paddingHorizontal: L.w(20) }}>
+          <View style={{ width: screenWidth, paddingHorizontal: 20 }}>
             <View style={styles.inputTitleStyle}>
               <Text style={{ color: 'white' }}> E-mail (o usuario si ya eres miembro) </Text>
             </View>
@@ -110,7 +109,7 @@ class LoginForm extends Component {
             </View>
           </View>
           {!!this.state.loginError &&
-          <Text style={{ padding: L.w(20), color: 'red', fontSize: 16 }}>
+          <Text style={{ padding: 20, color: 'red', fontSize: 16 }}>
             {this.state.loginError}
           </Text>}
         </View>
@@ -123,12 +122,12 @@ const styles = {
   container: {
     alignItems: 'center',
     flex: 1,
-    paddingBottom: L.h(20),
-    marginTop: Platform.OS === 'ios' ? L.h(20) : 0,
+    paddingBottom: 20,
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
     backgroundColor: '#264053',
   },
   titleContainer: {
-    padding: L.w(50),
+    padding: 50,
     
   },
   titleStyle: {
