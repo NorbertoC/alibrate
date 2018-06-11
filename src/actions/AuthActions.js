@@ -27,7 +27,6 @@ export const loginUser = (data, successCallback, errorCallback) => {
       payload: true
     });
     AuthService.login(data, (response) => {
-      console.log('login', response);
       dispatch({ type: CLEAR_FIELDS });
       dispatch({
         type: LOADING_PROPS,

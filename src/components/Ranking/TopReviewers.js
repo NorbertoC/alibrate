@@ -25,11 +25,11 @@ class Main extends Component {
   }
   
   successCallback(response) {
-    console.log('success topReviewers: ', response);
+    // console.log('success topReviewers: ', response);
   }
   
   errorCallback(error) {
-    console.log('error: ', error);
+    // console.log('error: ', error);
   }
   
   renderUsers() {

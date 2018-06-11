@@ -25,18 +25,17 @@ class Main extends Component {
   }
   
   successCallback(response) {
-    console.log('success topReaders: ', response);
+    // console.log('success topReaders: ', response);
   }
   
   errorCallback(error) {
-    console.log('error: ', error);
+    // console.log('error: ', error);
   }
   
   renderUsers() {
     const { topReaders } = this.props;
     if(topReaders) {
       const usersInfo = topReaders.map((user, index) => {
-        console.log('readers: ', user);
         const userNumber = index + 1;
         const reviews = `${user.libraryCount} leídos`;
         return (
